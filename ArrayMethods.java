@@ -34,7 +34,7 @@ class ArrayMethods {
       return false;
     }
     Map<Character, Integer> seen = new HashMap<>();
-
+    
     for (int i = 0; i < s1.length(); ++i) {
       char ch = s1.charAt(i);
       seen.put(ch, seen.getOrDefault(ch, 0) + 1);
