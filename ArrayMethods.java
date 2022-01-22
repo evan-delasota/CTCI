@@ -33,23 +33,57 @@ class ArrayMethods {
     if (s1.length() != s2.length()) {
       return false;
     }
-    Map<Character, Integer> seen = new HashMap<>();
+
+    Map<Character, Integer> seenOne = new HashMap<>();
+    Map<Character, Integer> seenTwo = new HashMap<>();
     
     for (int i = 0; i < s1.length(); ++i) {
       char ch = s1.charAt(i);
-      seen.put(ch, seen.getOrDefault(ch, 0) + 1);
+      seenOne.put(ch, seenOne.getOrDefault(ch, 0) + 1);
     }
 
     for (int i = 0; i < s2.length(); ++i) {
       char ch = s2.charAt(i);
-      if (seen.containsKey(ch)) {
-        if (seen.get(ch) == 0) {
-          seen.remove(ch);
-        }
-        seen.put(ch, seen.get(ch) - 1);
+      seenTwo.put(ch, seenTwo.getOrDefault(ch, 0) + 1);
+    }
+    
+    for (int i = 0; i < s1.length(); ++i) {
+      char ch = s1.charAt(i);
+      if (seenOne.get(ch) != seenTwo.get(ch)) {
+        return false;
       }
     }
 
-    return (seen.size() == 0) ? true : false;
+    return true;
+  }
+  // 1.3
+  public static String urlify(char[] url, int trueLength) {
+    int numOfSpaces = characterCount(url, 0, trueLength, ' ');
+    int newIndex = trueLength - 1 + numOfSpaces * 2;
+
+    for (int oldIndex = trueLength - 1; oldIndex >= 0; --oldIndex) {
+      if (url[oldIndex] == ' ') {
+        url[newIndex] = '0';
+        url[newIndex - 1] = '2';
+        url[newIndex - 2] = '%';
+        newIndex -= 3;
+      } else {
+        url[newIndex] = url[oldIndex];
+        newIndex--;
+      }
+    }
+
+    return new String(url).trim();
+  }
+
+  public static int characterCount(char[] charArray, int start, int end, int target) {
+    int spaces = 0;
+    for (int i = start; i < end; ++i) {
+      if (charArray[i] == target) {
+        spaces++;
+      }
+    }
+
+    return spaces;
   }
 }
