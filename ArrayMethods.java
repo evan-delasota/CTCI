@@ -90,18 +90,7 @@ class ArrayMethods {
 
     return new String(url);
   }
-
-  // 1.3 helper method
-  public static int characterCount(char[] charArray, int start, int end, int target) {
-    int spaces = 0;
-    for (int i = start; i < end; ++i) {
-      if (charArray[i] == target) {
-        spaces++;
-      }
-    }
-
-    return spaces;
-  }
+  
   // 1.4
   public static boolean isPalindromePermutation(String string) {
     if (string.length() < 2) {
