@@ -75,6 +75,7 @@ class ArrayMethods {
     int newIndex = newLength - 1;
     char[] oldUrl = url;
     url = new char[newLength];
+
     for (int j = i - 1; j >= 0; --j) {
       if (oldUrl[j] == ' ') {
         url[newIndex] = '0';
@@ -86,17 +87,6 @@ class ArrayMethods {
         newIndex--;
       }
     }
-    // for (int oldIndex = trueLength - 1; oldIndex >= 0; --oldIndex) {
-    //   if (url[oldIndex] == ' ') {
-    //     url[newIndex] = '0';
-    //     url[newIndex - 1] = '2';
-    //     url[newIndex - 2] = '%';
-    //     newIndex -= 3;
-    //   } else {
-    //     url[newIndex] = url[oldIndex];
-    //     newIndex--;
-    //   }
-    // }
 
     return new String(url);
   }
