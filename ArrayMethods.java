@@ -56,25 +56,51 @@ class ArrayMethods {
 
     return true;
   }
-  // 1.3
-  public static String urlify(char[] url, int trueLength) {
-    int numOfSpaces = characterCount(url, 0, trueLength, ' ');
-    int newIndex = trueLength - 1 + numOfSpaces * 2;
+  // 1.3 revised to calculate true length automatically
+  public static String urlify(char[] url) {
+    int i = 0;
+    int numOfSpaces = 0;
+    for (i = 0; i < url.length; ++i) {
+      if (url[i] == ' ') {
+        numOfSpaces++;
+      }
+    }
 
-    for (int oldIndex = trueLength - 1; oldIndex >= 0; --oldIndex) {
-      if (url[oldIndex] == ' ') {
+    while (url[i - 1] == ' ') {
+      numOfSpaces--;
+      i--;
+    }
+
+    int newLength = i + numOfSpaces * 2;
+    int newIndex = newLength - 1;
+    char[] oldUrl = url;
+    url = new char[newLength];
+    for (int j = i - 1; j >= 0; --j) {
+      if (oldUrl[j] == ' ') {
         url[newIndex] = '0';
         url[newIndex - 1] = '2';
         url[newIndex - 2] = '%';
         newIndex -= 3;
       } else {
-        url[newIndex] = url[oldIndex];
+        url[newIndex] = oldUrl[j];
         newIndex--;
       }
     }
+    // for (int oldIndex = trueLength - 1; oldIndex >= 0; --oldIndex) {
+    //   if (url[oldIndex] == ' ') {
+    //     url[newIndex] = '0';
+    //     url[newIndex - 1] = '2';
+    //     url[newIndex - 2] = '%';
+    //     newIndex -= 3;
+    //   } else {
+    //     url[newIndex] = url[oldIndex];
+    //     newIndex--;
+    //   }
+    // }
 
-    return new String(url).trim();
+    return new String(url);
   }
+
   // 1.3 helper method
   public static int characterCount(char[] charArray, int start, int end, int target) {
     int spaces = 0;
