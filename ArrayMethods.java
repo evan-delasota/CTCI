@@ -114,4 +114,42 @@ class ArrayMethods {
 
     return true;
   }
+
+  // 1.4
+  public static boolean oneAway(String s1, String s2) {
+    if (Math.abs(s1.length() - s2.length()) > 1) {
+      return false;
+    } 
+    int lengthOne = s1.length();
+    int lengthTwo = s2.length();
+    int editCount = 0;
+    int i = 0;
+    int j = 0;
+
+    while (i < lengthOne && j < lengthTwo) {
+      if (s1.charAt(i) != s2.charAt(j)) {
+        if (editCount == 1) {
+          return false;
+        }
+        if (lengthOne > lengthTwo) {
+          i++;
+        } else if (lengthTwo > lengthOne) {
+          j++;
+        } else {
+          i++;
+          j++;
+        }
+
+        editCount++;
+      } else {
+        i++;
+        j++;
+      }
+    }
+    if (i < lengthOne || j < lengthTwo) {
+      editCount++;
+    }
+
+    return (editCount == 0 || editCount == 1);
+  }
 }
