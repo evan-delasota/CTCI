@@ -75,7 +75,7 @@ class ArrayMethods {
 
     return new String(url).trim();
   }
-
+  // 1.3 helper method
   public static int characterCount(char[] charArray, int start, int end, int target) {
     int spaces = 0;
     for (int i = start; i < end; ++i) {
@@ -85,5 +85,33 @@ class ArrayMethods {
     }
 
     return spaces;
+  }
+  // 1.4
+  public static boolean isPalindromePermutation(String string) {
+    if (string.length() < 2) {
+      return false;
+    }
+    String trimmedString = string.replaceAll("[^a-zA-Z]", "").toLowerCase();
+    int oddCount = 0;
+    Map<Character, Integer> characterCount = new HashMap<>();
+
+    for (int i = 0; i < trimmedString.length(); ++i) {
+      char ch = trimmedString.charAt(i);
+      characterCount.put(ch, characterCount.getOrDefault(ch, 0) + 1);
+    }
+
+    Iterator mapIterator = characterCount.entrySet().iterator();
+    while (mapIterator.hasNext()) {
+      Map.Entry element = (Map.Entry)mapIterator.next();
+      if ((int)element.getValue() % 2 == 1) {
+        oddCount++;
+      }
+
+      if (oddCount > 1) {
+        return false;
+      }
+    }
+
+    return true;
   }
 }
