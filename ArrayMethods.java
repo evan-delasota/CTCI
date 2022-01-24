@@ -164,10 +164,11 @@ class ArrayMethods {
     }
     StringBuilder sb = new StringBuilder();
     int characterCount = 1;
+
     for (int i = 1; i < string.length(); ++i) {
       char prev = string.charAt(i - 1);
       char current = string.charAt(i);
-      // if current character is different from previous, append previous + count, reset count to 1
+      // if current character is different from previous, append previous + count, reset count to 0
       if (current != prev) {
         sb.append(prev);
         sb.append(characterCount);
@@ -175,9 +176,10 @@ class ArrayMethods {
       }
       characterCount++;
     }
+    // Adding the last character + count to string
     sb.append(string.charAt(string.length() - 1));
     sb.append(characterCount);
-    System.out.println("current: " + sb.toString());
+
     String result = sb.toString();
     return (result.length() < string.length()) ? result : string;
   }
