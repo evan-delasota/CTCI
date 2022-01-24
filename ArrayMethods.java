@@ -90,7 +90,7 @@ class ArrayMethods {
 
     return new String(url);
   }
-  
+
   // 1.4
   public static boolean isPalindromePermutation(String string) {
     if (string.length() < 2) {
@@ -120,7 +120,7 @@ class ArrayMethods {
     return true;
   }
 
-  // 1.4
+  // 1.5
   public static boolean oneAway(String s1, String s2) {
     if (Math.abs(s1.length() - s2.length()) > 1) {
       return false;
@@ -156,5 +156,29 @@ class ArrayMethods {
     }
 
     return (editCount == 0 || editCount == 1);
+  }
+  // 1.6
+  public static String compress(String string) {
+    if (string.length() < 1) {
+      return string;
+    }
+    StringBuilder sb = new StringBuilder();
+    int characterCount = 1;
+    for (int i = 1; i < string.length(); ++i) {
+      char prev = string.charAt(i - 1);
+      char current = string.charAt(i);
+      // if current character is different from previous, append previous + count, reset count to 1
+      if (current != prev) {
+        sb.append(prev);
+        sb.append(characterCount);
+        characterCount = 0;
+      }
+      characterCount++;
+    }
+    sb.append(string.charAt(string.length() - 1));
+    sb.append(characterCount);
+    System.out.println("current: " + sb.toString());
+    String result = sb.toString();
+    return (result.length() < string.length()) ? result : string;
   }
 }

@@ -3,6 +3,6 @@ import java.util.*;
 
 class Main {
   public static void main(String[] args) {
-  // Using Junit within replit to test methods
+    // Using Junit within replit to test methods
   }
 }
