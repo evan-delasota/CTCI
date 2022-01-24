@@ -1,7 +1,7 @@
 import java.util.*;
 
 class ArrayMethods {
-  // 1.1 Overloaded to work with a list of strings or a single string
+  // 1.1 Unique Characters
   public static boolean isUnique(List<String> list) {
     Set<String> seen = new HashSet<>();
     for (int i = 0; i < list.size(); ++i) {
@@ -28,7 +28,7 @@ class ArrayMethods {
     return true;
   }
 
-  // 1.2
+  // 1.2 Permutation 
   public static boolean isPermutation(String s1, String s2) {
     if (s1.length() != s2.length()) {
       return false;
@@ -56,16 +56,17 @@ class ArrayMethods {
 
     return true;
   }
-  // 1.3 revised to calculate true length automatically
+  // 1.3 urlify
   public static String urlify(char[] url) {
     int i = 0;
     int numOfSpaces = 0;
+    // calculate amount of spaces in string
     for (i = 0; i < url.length; ++i) {
       if (url[i] == ' ') {
         numOfSpaces++;
       }
     }
-
+    // account for any spaces in front of string, subtract from original space count
     while (url[i - 1] == ' ') {
       numOfSpaces--;
       i--;
@@ -75,7 +76,7 @@ class ArrayMethods {
     int newIndex = newLength - 1;
     char[] oldUrl = url;
     url = new char[newLength];
-
+    // starts at first non-space character of original string, works down to beginning
     for (int j = i - 1; j >= 0; --j) {
       if (oldUrl[j] == ' ') {
         url[newIndex] = '0';
@@ -91,7 +92,7 @@ class ArrayMethods {
     return new String(url);
   }
 
-  // 1.4
+  // 1.4 Palindrome Permutation
   public static boolean isPalindromePermutation(String string) {
     if (string.length() < 2) {
       return false;
@@ -120,7 +121,7 @@ class ArrayMethods {
     return true;
   }
 
-  // 1.5
+  // 1.5 One Away
   public static boolean oneAway(String s1, String s2) {
     if (Math.abs(s1.length() - s2.length()) > 1) {
       return false;
@@ -132,32 +133,38 @@ class ArrayMethods {
     int j = 0;
 
     while (i < lengthOne && j < lengthTwo) {
+      // If two or more nonequivalent characters found, return false
       if (s1.charAt(i) != s2.charAt(j)) {
         if (editCount == 1) {
           return false;
         }
+        // nonequivalent character and first string length is greater than second string length
         if (lengthOne > lengthTwo) {
           i++;
+        // nonequivalent character and second string length is greater than first string length
         } else if (lengthTwo > lengthOne) {
           j++;
+        // nonequivalent character and both strings are of equivalent length
         } else {
           i++;
           j++;
         }
 
         editCount++;
+        // equivalent character, increment both string iterators
       } else {
         i++;
         j++;
       }
     }
+    // Account for any leftover characters
     if (i < lengthOne || j < lengthTwo) {
       editCount++;
     }
 
     return (editCount == 0 || editCount == 1);
   }
-  // 1.6
+  // 1.6 Compress String
   public static String compress(String string) {
     if (string.length() < 1) {
       return string;
@@ -183,4 +190,10 @@ class ArrayMethods {
     String result = sb.toString();
     return (result.length() < string.length()) ? result : string;
   }
+
+  // 1.7 Rotate Matrix
+    
+  // 1.8 Zero Matrix
+
+  // 1.9 String Rotation
 }
