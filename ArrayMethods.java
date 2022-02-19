@@ -233,4 +233,23 @@ class ArrayMethods {
     
     return maxSum;
   }
+
+  // Smallest subarray with a greater sum
+  public static int smallestSubarrayGreaterThanSum(int[] arr, int s) {
+    int windowStart = 0;
+    int currentWindow = 0;
+    int minLength = Integer.MAX_VALUE;
+
+    for (int windowEnd = 0; windowEnd < arr.length; ++windowEnd) {
+      currentWindow += arr[windowEnd];
+
+      while (currentWindow >= s) {
+        minLength = Math.min(minLength, windowEnd - windowStart + 1);
+        currentWindow -= arr[windowStart];
+        windowStart++;
+      }
+    }
+
+    return minLength == Integer.MAX_VALUE ? 0 : minLength;
+  }
 }
