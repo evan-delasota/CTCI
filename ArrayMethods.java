@@ -197,7 +197,7 @@ class ArrayMethods {
 
   // 1.9 String Rotation
 
-  // Maximum Sum Subarray of Size K
+  // Average of all subarrays of 'K' contiguous elements
   public static double[] findSubarrayAverages(int[] arr, int k) {
     double[] result = new double[arr.length - k + 1];
     double windowSum = 0;
@@ -213,5 +213,24 @@ class ArrayMethods {
     }
       
     return result;
+  }
+
+  // Maximum Sum Subarray of Size K
+  public static int maxSumSubarray(int[] arr, int k) {
+  
+    int maxSum = 0;
+    int windowSum = 0;
+    int windowStart = 0;
+    for (int windowEnd = 0; windowEnd < arr.length; ++windowEnd) {
+      windowSum += arr[windowEnd];
+
+      if (windowEnd >= k - 1) {
+        maxSum = Math.max(maxSum, windowSum);
+        windowSum -= arr[windowStart];
+        windowStart++;
+      }
+    }
+    
+    return maxSum;
   }
 }
