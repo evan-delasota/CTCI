@@ -252,4 +252,19 @@ class ArrayMethods {
 
     return minLength == Integer.MAX_VALUE ? 0 : minLength;
   }
+  // Find the contiguous subarray with the largest possible sum, return sum
+  public static int maxSubarray(int[] array) {
+    int sum = array[0];
+    int currentSubarray = [array[0];
+
+    for (int i = 1; i < array.length; ++i) {
+      int currentValue = array[i];
+      // If currentValue is greater than currentSubarray + currentValue, "restart" subarray and assign currentSubarray to currentValue
+      currentSubarray = Math.max(currentValue, currentSubarray + currentValue);
+      // Find maximum sum between currentSubarray and current sum
+      sum = Math.max(sum, currentSubarray);
+    }
+
+    return sum;
+  }
 }
