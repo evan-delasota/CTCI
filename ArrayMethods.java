@@ -197,6 +197,7 @@ class ArrayMethods {
 
   // 1.9 String Rotation
 
+  // ------------------------------------------------------ NON-CTCI SOLUTIONS ------------------------------------------------------
   // Average of all subarrays of 'K' contiguous elements
   public static double[] findSubarrayAverages(int[] arr, int k) {
     double[] result = new double[arr.length - k + 1];
@@ -252,6 +253,24 @@ class ArrayMethods {
 
     return minLength == Integer.MAX_VALUE ? 0 : minLength;
   }
+
+  // Find max stock profit given an array of values
+  public static int maxProfit(int[] values) {
+    int minPrice = 0;
+    int maxProfit = 0;
+
+    for (int i = 0; i < values.length; ++i) {
+      int currValue = values[i];
+      if (currValue < minPrice) {
+        minPrice = currValue;
+      } else {
+        maxProfit = Math.max(maxProfit, currValue - minPrice);
+      }
+    }
+
+    return maxProfit;
+  }
+  
   // Find the contiguous subarray with the largest possible sum, return sum
   public static int maxSubarray(int[] array) {
     int sum = array[0];
